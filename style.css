@@ -1,0 +1,28 @@
+body {
+    background-color: rgb(231, 189, 53);
+}
+
+.square {
+    height: 200px;
+    width: 200px;
+    background-color: black;
+    border: 30px solid white;
+    display: inline-block;
+    margin: 50px;
+}
+
+img {
+    width: 100%;
+    height: auto;
+  }
+
+.footer {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    background-color: grey;
+    height: 50px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
