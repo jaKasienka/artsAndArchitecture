@@ -3,20 +3,26 @@ body {
 }
 
 .square {
-    height: 200px;
-    width: 200px;
-    background-color: black;
+    height: 100px;
+    width: 100px;
     border: 30px solid white;
     display: inline-block;
-    margin: 50px;
+    margin: 40px;
 }
 
 img {
     width: 100%;
     height: auto;
-  }
+    transform: scale(1);
+    transition: transform 2s;
+} 
 
-.footer {
+img.scale {
+    transform: scale(1.7);
+    transition: transform 2s ease-out;
+}
+
+.footer, #numbers{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: white;
     background-color: grey;
@@ -25,4 +31,16 @@ img {
     display: flex;
     justify-content: center;
     text-align: center;
+}
+
+#button-get, #button-reset {
+    margin-left: 10px;
+    margin-top: 8px;
+    margin-bottom: 5px;
+    padding: 5px 20px 7px 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+    /* border-radius: 3px; */
+    background-color: white;
+    border-color: white;
 }
