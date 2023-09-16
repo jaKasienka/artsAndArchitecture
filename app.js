@@ -1,3 +1,27 @@
+class Picture {
+    constructor(picName) {
+        this.picName = picName;
+    }
+    output(){
+        return this.picName;
+    }
+    // simulation of database-product-number:
+    productNumber(){
+        return Math.round(Math.random() * (99999 - 10000) + 10000);
+    }
+}
+
+class Rendering extends Picture {
+    constructor(picName, prgrm) {
+        super(picName); 
+        this.prgrm = prgrm;
+    }
+    output2(){
+        return this.output() + ", " + this.prgrm;
+    }
+}
+
+
 function buttonsNew (){
     if (arr.length == 1){
         const buttonGet = document.createElement("button");
@@ -6,7 +30,7 @@ function buttonsNew (){
         const current = document.getElementById('numbers');
         current.appendChild(buttonGet);
         buttonGet.addEventListener('click', function() {
-            alert("pics in your cart!");
+            alert(countPics + " pics and " + countRends + " renderigs in your cart!");
         })
 
         const buttonGet2 = document.createElement("button");
@@ -21,6 +45,8 @@ function buttonsRemove (){
     const reset = document.getElementById("button-reset");
     reset.addEventListener('click', function() {
         arr = [];
+        countPics = 0;
+        countRends = 0;
         let divNum = document.getElementById("picNum");
         divNum.innerHTML = "choose pictures by click: ";
         const get = document.getElementById("button-get");
@@ -33,7 +59,11 @@ function buttonsRemove (){
     })
 }
 
+
+// 2 for-loops for hovering and clicking in case of errors (performance?)
 const make = document.getElementsByTagName('img');
+
+// hovering and scaling images:
 for (let i=0; i<make.length; i++){
     make[i].addEventListener('mouseover', function(){
         make[i].classList.add('scale');
@@ -43,17 +73,37 @@ for (let i=0; i<make.length; i++){
     });
 }
 
+
+countPics = 0;
+countRends = 0;
 let arr = [];
-let a = "";
+let product = 0;
 for (let i=0; i<make.length; i++){
     make[i].addEventListener('click', function(){
-        a=this.id; 
-        arr.push(a);
-        let setArr = new Set(arr);
-        let arrNew = [...setArr];
-        let divNum = document.getElementById("picNum");
-        divNum.innerHTML = "you choose: " + arrNew.toString();
-        buttonsNew();
-        buttonsRemove();
+
+         // choose (click) images, put in array:
+         arr.push(this.id);
+         let setArr = new Set(arr);
+         let arrNew = [...setArr];
+         let divNum = document.getElementById("picNum");
+         divNum.innerHTML = "you choose: " + arrNew.toString();
+         buttonsNew();
+         buttonsRemove();
+
+        // count pictures and renderings:
+        if (this.alt == ""){
+            let pic = new Picture(this.id);
+            countPics++;
+            product = pic.productNumber();
+            alert("Productnumber: " + product + " for more information scroll down!");
+            console.log(pic.output());
+        }
+        else {
+            let rend = new Rendering(this.id, this.alt);
+            countRends++;
+            product = rend.productNumber();
+            alert("Productnumber: " + product + " for more information scroll down!");
+            console.log(rend.output2());
+        }
     }) 
 }
