@@ -39,15 +39,34 @@ function buttonsNew (){
     buttonGet2.innerText = "reset";
     buttonGet2.id = "button-reset";
     const current2 = document.getElementById('numbers');
-    if (!current){
+    if (!current2){
         throw new Error ("Html-Div-Element not existing!");  
     }
     current2.appendChild(buttonGet2);
 }
 
-/* function buttonsRemove (arr){
-    
-} */
+let arr = [];
+
+function buttonsRemove (){
+    const reset = document.getElementById("button-reset");
+    if (!reset){
+        throw new Error ("reset Button not existing");
+    }
+    reset.addEventListener('click', function() {
+        arr = [];
+        countPics = 0;
+        countRends = 0;
+        let divNum = document.getElementById("picNum");
+        divNum.innerHTML = "choose pictures by click: ";
+        const get = document.getElementById("button-get");
+        if (get && this.parentNode){
+            get.parentNode.removeChild(get);
+        }
+        if (reset && this.parentNode){
+            reset.parentNode.removeChild(reset);
+        }
+    })
+}
 
 try {
     // 2 for-loops for hovering and clicking in case of errors (performance?)
@@ -65,7 +84,6 @@ try {
 
     countPics = 0;
     countRends = 0;
-    let arr = [];
     let product = 0;
     let divNum = document.getElementById("picNum");
     divNum.innerHTML = "choose pictures by click: ";
@@ -84,27 +102,8 @@ try {
             if (arr.length == 1){
                 buttonsNew();
             }
-
-            //buttonsRemove();
-            const reset = document.getElementById("button-reset");
-            if (!reset){
-                throw new Error ("reset Button not existing");
-            }
-            reset.addEventListener('click', function() {
-                arr = [];
-                countPics = 0;
-                countRends = 0;
-                //let divNum = document.getElementById("picNum");
-                divNum.innerHTML = "choose pictures by click: ";
-                const get = document.getElementById("button-get");
-                if (get && this.parentNode){
-                    get.parentNode.removeChild(get);
-                }
-                if (reset && this.parentNode){
-                    reset.parentNode.removeChild(reset);
-                }
-            })
-
+            buttonsRemove();
+            
             // count pictures and renderings:
             if (this.alt == ""){
                 let pic = new Picture(this.id);
